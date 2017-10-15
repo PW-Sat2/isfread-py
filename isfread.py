@@ -59,7 +59,7 @@ def isfread(filename):
         y - list with the y values
         head - dictionary with the head-information stored in the file."""
 
-    FID = open(filename,'r')
+    FID = open(filename,'rb')
 
     hdata = FID.read(511);		# read first 511 bytes
 
@@ -91,22 +91,22 @@ def isfread(filename):
         return string[n2+1:n3]    
     #---------------------------------------------------------------------------
 
-    head={'bytenum': getnum(hdata,'BYT_NR'),
-            'bitnum':  getnum(hdata,'BIT_NR'),
-            'encoding':  getstr(hdata,'ENCDG'),
-            'binformat': getstr(hdata,'BN_FMT'),
-            'byteorder': getstr(hdata,'BYT_OR'),
-            'wfid': getquotedstr(hdata,'WFID'),
-            'pointformat': getstr(hdata,'PT_FMT'),
-            'xunit': getquotedstr(hdata,'XUNIT'),
-            'yunit': getquotedstr(hdata,'YUNIT'),
-            'xzero': getnum(hdata,'XZERO'),
-            'xincr': getnum(hdata,'XINCR'),
-            'ptoff': getnum(hdata,'PT_OFF'),
-            'ymult': getnum(hdata,'YMULT'),
-            'yzero': getnum(hdata,'YZERO'),
-            'yoff': getnum(hdata,'YOFF'),
-            'npts': getnum(hdata,'NR_PT')}
+    head={'bytenum': getnum(hdata,'BYT_N'),
+            'bitnum':  getnum(hdata,'BIT_N'),
+            'encoding':  getstr(hdata,'ENC'),
+            'binformat': getstr(hdata,'BN_F'),
+            'byteorder': getstr(hdata,'BYT_O'),
+            'wfid': getquotedstr(hdata,'WFI'),
+            'pointformat': getstr(hdata,'PT_F'),
+            'xunit': getquotedstr(hdata,'XUN'),
+            'yunit': getquotedstr(hdata,'YUN'),
+            'xzero': getnum(hdata,'XZE'),
+            'xincr': getnum(hdata,'XIN'),
+            'ptoff': getnum(hdata,'PT_O'),
+            'ymult': getnum(hdata,'YMU'),
+            'yzero': getnum(hdata,'YZE'),
+            'yoff': getnum(hdata,'YOF'),
+            'npts': getnum(hdata,'NR_P')}
 
     # The only cases that this code (at this moment) not take into acount.
     if ((head['bytenum'] != 2) or (head['bitnum'] != 16) or 
@@ -124,8 +124,8 @@ def isfread(filename):
     # Comment: It should be happend that: NR_PT times BYT_NR = <yy..y> 
   
     # Skipping the #<x><yy...y> part of the <Block> bytes
-    ii = hdata.find(':CURVE #')    
-    FID.seek(ii+8)			
+    ii = hdata.find(':CURV #')    
+    FID.seek(ii+7)			
     skip = int(FID.read(1)) 
     n1 =  int(FID.read(skip))
 
