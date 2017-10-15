@@ -1,8 +1,10 @@
 Python script for read data from a Tektronix ".ISF" files
 ----------------------------------------------------------
 
-Python script for reading binary ISF files from TDS series Tektronix 
-Oscilloscope instruments. 
+Python script for reading binary ISF files from DPO series Tektronix 
+Oscilloscope instruments.
+
+Tested only on Tektronix DPO 4104 with Python 2.7.12.
 
 
 Short usage example
